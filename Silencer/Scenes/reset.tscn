@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://v7fp2cjfqklf"]
+
+[ext_resource type="Script" path="res://Scenes/reset.gd" id="1_rop4h"]
+
+[node name="Reset" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rop4h")
+
+[node name="ResetButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 70.0
+offset_right = 140.0
+offset_bottom = 31.0
+text = "Reset"
+
+[connection signal="pressed" from="ResetButton" to="." method="_on_reset_button_pressed"]

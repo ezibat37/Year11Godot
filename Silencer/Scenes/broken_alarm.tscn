@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=3 uid="uid://bosnu22kpc7tt"]
+
+[ext_resource type="Texture2D" uid="uid://bi8qj6mupx5p6" path="res://Sprites/Items/broken alarm.png" id="1_o7q8o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbehj"]
+atlas = ExtResource("1_o7q8o")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rwh2y"]
+atlas = ExtResource("1_o7q8o")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j5xt5"]
+atlas = ExtResource("1_o7q8o")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l1pka"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbehj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rwh2y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j5xt5")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="Animation" id="Animation_oaev5"]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [0, 1, 2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["default"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xjspk"]
+_data = {
+"default": SubResource("Animation_oaev5")
+}
+
+[node name="BrokenAlarm" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_l1pka")
+autoplay = "default"
+frame = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_xjspk")
+}
+autoplay = "default"

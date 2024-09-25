@@ -1,0 +1,85 @@
+[gd_scene load_steps=12 format=3 uid="uid://deai80h61khdj"]
+
+[ext_resource type="Script" path="res://Scenes/enemy_dog.gd" id="1_oqfxm"]
+[ext_resource type="Texture2D" uid="uid://d4livo83r7p1m" path="res://Enemies/Dog/Dog_medium.png" id="2_sjqwc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w0r7g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_be50i"]
+atlas = ExtResource("2_sjqwc")
+region = Rect2(0, 38, 60, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2yfdl"]
+atlas = ExtResource("2_sjqwc")
+region = Rect2(60, 38, 60, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nju5l"]
+atlas = ExtResource("2_sjqwc")
+region = Rect2(120, 38, 60, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hama8"]
+atlas = ExtResource("2_sjqwc")
+region = Rect2(180, 38, 60, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yxnyc"]
+atlas = ExtResource("2_sjqwc")
+region = Rect2(240, 38, 60, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmfkm"]
+atlas = ExtResource("2_sjqwc")
+region = Rect2(300, 38, 60, 38)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qmjvc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_be50i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2yfdl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nju5l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hama8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yxnyc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vmfkm")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_36by4"]
+radius = 8.0
+
+[node name="Dog" type="CharacterBody2D" groups=["Enemy", "Hurt"]]
+script = ExtResource("1_oqfxm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Enemy", "Hurt"]]
+scale = Vector2(0.9, 0.9)
+shape = SubResource("CircleShape2D_w0r7g")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_qmjvc")
+animation = &"Walk"
+autoplay = "Walk"
+
+[node name="Timer" type="Timer" parent="." groups=["Hurt"]]
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="." groups=["Hurt"]]
+position = Vector2(-2, 0)
+scale = Vector2(0.96, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(1.38048, 0.79193)
+shape = SubResource("CircleShape2D_36by4")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

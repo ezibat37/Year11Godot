@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsmwwhlnhrb3l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hyct4"]
+size = Vector2(20234, 2244)
+
+[node name="Killbox" type="Node2D"]
+scale = Vector2(0.154713, 0.138729)
+
+[node name="Area2D" type="Area2D" parent="." groups=["Hurt"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["Hurt"]]
+position = Vector2(10107, 1112)
+shape = SubResource("RectangleShape2D_hyct4")

@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=3 uid="uid://bs5tn7r6mk2wh"]
+
+[ext_resource type="Script" path="res://Scenes/enemy_bat.gd" id="1_br12o"]
+[ext_resource type="Texture2D" uid="uid://ck3bik5r5vjq7" path="res://Enemies/Bat/BatMovement.png" id="2_jms67"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_de4e3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xdq8b"]
+atlas = ExtResource("2_jms67")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_os55m"]
+atlas = ExtResource("2_jms67")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p2mnb"]
+atlas = ExtResource("2_jms67")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bh600"]
+atlas = ExtResource("2_jms67")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ii3n3"]
+atlas = ExtResource("2_jms67")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l82pu"]
+atlas = ExtResource("2_jms67")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sjyv0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xdq8b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_os55m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p2mnb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bh600")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ii3n3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l82pu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Bat" type="Area2D" groups=["Enemy", "Hurt"]]
+script = ExtResource("1_br12o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Enemy", "Hurt"]]
+shape = SubResource("CircleShape2D_de4e3")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_sjyv0")
+autoplay = "default"
+frame = 5
+frame_progress = 0.769591
+
+[node name="Timer" type="Timer" parent="." groups=["Hurt"]]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
